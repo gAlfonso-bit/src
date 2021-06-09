@@ -42,9 +42,9 @@
 .Sh SYNOPSIS
 .In string.h
 .Ft size_t
-.Fn strxfrm "char *dst" "const char *src" "size_t n"
+.Fn strxfrm "char * restrict dst" "const char * restrict src" "size_t n"
 .Ft size_t
-.Fn strxfrm_l "char *dst" "const char *src" "size_t n" "locale_t locale"
+.Fn strxfrm_l "char * restrict dst" "const char * restrict src" "size_t n" "locale_t locale"
 .Sh DESCRIPTION
 The idea of
 .Fn strxfrm
