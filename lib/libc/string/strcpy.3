@@ -40,7 +40,7 @@
 .Sh SYNOPSIS
 .In string.h
 .Ft char *
-.Fn strcpy "char *dst" "const char *src"
+.Fn strcpy "char * restrict dst" "const char * restrict src"
 .Sh DESCRIPTION
 The
 .Fn strcpy
@@ -75,7 +75,7 @@ function returns
 The
 .Fn strcpy
 function conforms to
-.St -ansiC .
+.St -iso-c99 .
 .Sh HISTORY
 The
 .Fn strcpy

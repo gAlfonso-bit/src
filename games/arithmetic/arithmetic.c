@@ -130,7 +130,7 @@ main(int argc, char *argv[])
 
 	/* Now ask the questions. */
 	for (;;) {
-		for (cnt = NQUESTS; cnt--;)
+		for (cnt = NQUESTS; cnt; cnt--)
 			if (problem() == EOF)
 				intr(0);   /* Print score and exit */
 		showstats();

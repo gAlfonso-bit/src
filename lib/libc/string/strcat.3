@@ -40,7 +40,7 @@
 .Sh SYNOPSIS
 .In string.h
 .Ft char *
-.Fn strcat "char *dst" "const char *append"
+.Fn strcat "char * restrict dst" "const char * restrict append"
 .Sh DESCRIPTION
 The
 .Fn strcat
@@ -69,7 +69,7 @@ function return the pointer
 The
 .Fn strcat
 function conforms to
-.St -ansiC .
+.St -iso-c99 .
 .Sh HISTORY
 The
 .Fn strcat
