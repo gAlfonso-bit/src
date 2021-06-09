@@ -52,8 +52,8 @@ static const char backwards_msg[] = ": backwards memcpy";
 void *
 memcpy(void * __restrict dst0, const void * __restrict src0, size_t length)
 {
-	char *dst = dst0;
-	const char *src = src0;
+	char *dst = (char *)dst0;
+	const char *src = (const char *)src0;
 	size_t t;
 
 	if (length == 0 || dst == src)		/* nothing to do */
