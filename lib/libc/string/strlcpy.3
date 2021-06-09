@@ -24,9 +24,9 @@
 .Sh SYNOPSIS
 .In string.h
 .Ft size_t
-.Fn strlcpy "char *dst" "const char *src" "size_t dstsize"
+.Fn strlcpy "char * restrict dst" "const char * restrict src" "size_t dstsize"
 .Ft size_t
-.Fn strlcat "char *dst" "const char *src" "size_t dstsize"
+.Fn strlcat "char * restrict dst" "const char * restrict src" "size_t dstsize"
 .Sh DESCRIPTION
 The
 .Fn strlcpy
