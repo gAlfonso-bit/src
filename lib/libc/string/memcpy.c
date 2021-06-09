@@ -50,7 +50,7 @@ static const char backwards_msg[] = ": backwards memcpy";
  * Copy a block of memory, not handling overlap.
  */
 void *
-memcpy(void * restrict dst0, const void * restrict src0, size_t length)
+memcpy(void * __restrict dst0, const void * __restrict src0, size_t length)
 {
 	char *dst = dst0;
 	const char *src = src0;
