@@ -40,7 +40,7 @@
 .Sh SYNOPSIS
 .In string.h
 .Ft char *
-.Fn strncpy "char *dst" "const char *src" "size_t len"
+.Fn strncpy "char * restrict dst" "const char * restrict src" "size_t len"
 .Sh DESCRIPTION
 The
 .Fn strncpy
@@ -130,7 +130,7 @@ if (strlcpy(buf, input, sizeof(buf)) >= sizeof(buf))
 The
 .Fn strncpy
 function conforms to
-.St -ansiC .
+.St -iso-c99 .
 .Sh HISTORY
 The
 .Fn strncpy
