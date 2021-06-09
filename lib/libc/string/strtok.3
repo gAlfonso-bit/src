@@ -41,9 +41,9 @@
 .Sh SYNOPSIS
 .In string.h
 .Ft char *
-.Fn strtok "char *str" "const char *sep"
+.Fn strtok "char * restrict str" "const char * restrict sep"
 .Ft char *
-.Fn strtok_r "char *str" "const char *sep" "char **last"
+.Fn strtok_r "char * restrict str" "const char * restrict sep" "char ** restrict last"
 .Sh DESCRIPTION
 .Bf -symbolic
 This interface is obsoleted by
@@ -138,7 +138,7 @@ will point to
 The
 .Fn strtok
 function conforms to
-.St -ansiC .
+.St -iso-c99 .
 The
 .Fn strtok_r
 function conforms to
