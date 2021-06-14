@@ -105,7 +105,5 @@ bcopy(const void *src0, void *dst0, size_t length)
 		t = length & wmask;
 		TLOOP(*--dst = *--src);
 	}
-
-	return;
 }
 DEF_WEAK(bcopy);
