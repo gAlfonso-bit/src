@@ -52,12 +52,12 @@ static const char backwards_msg[] = ": backwards memcpy";
 void *
 memcpy(void * restrict dst0, const void * restrict src0, size_t length)
 {
-	char *dst = (char *)dst0;
-	const char *src = (const char *)src0;
+	unsigned char *dst = (unsigned char *)dst0;
+	const unsigned char *src = (const unsigned char *)src0;
 	size_t t;
 
 	if (length == 0 || dst == src)		/* nothing to do */
-		goto done;
+		return dst0;
 
 	if ((dst < src && dst + length > src) ||
 	    (src < dst && src + length > dst)) {
@@ -103,7 +103,7 @@ memcpy(void * restrict dst0, const void * restrict src0, size_t length)
 	TLOOP(*(word *)dst = *(word *)src; src += wsize; dst += wsize);
 	t = length & wmask;
 	TLOOP(*dst++ = *src++);
-done:
+
 	return (dst0);
 }
 DEF_BUILTIN(memcpy);
