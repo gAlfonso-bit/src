@@ -37,7 +37,7 @@
  * sizeof(word) MUST BE A POWER OF TWO
  * SO THAT wmask BELOW IS ALL ONES
  */
-typedef	long word;		/* "word" used for optimal copy speed */
+typedef	unsigned long word;		/* "word" used for optimal copy speed */
 
 #define	wsize	sizeof(word)
 #define	wmask	(wsize - 1)
@@ -48,12 +48,12 @@ typedef	long word;		/* "word" used for optimal copy speed */
 void
 bcopy(const void *src0, void *dst0, size_t length)
 {
-	char *dst = dst0;
-	const char *src = src0;
+	unsigned char *dst = (unsigned char *)dst0;
+	const unsigned char *src = (const unsigned char *)src0;
 	size_t t;
 
 	if (length == 0 || dst == src)		/* nothing to do */
-		goto done;
+		return;
 
 	/*
 	 * Macros: loop-t-times; and loop-t-times, t>0
@@ -61,21 +61,20 @@ bcopy(const void *src0, void *dst0, size_t length)
 #define	TLOOP(s) if (t) TLOOP1(s)
 #define	TLOOP1(s) do { s; } while (--t)
 
-	if ((unsigned long)dst < (unsigned long)src) {
+	if ((word)dst < (word)src) {
 		/*
 		 * Copy forward.
 		 */
-		t = (long)src;	/* only need low bits */
-		if ((t | (long)dst) & wmask) {
+		t = (word)src;	/* only need low bits */
+		if ((t | (word)dst) & wmask) {
 			/*
 			 * Try to align operands.  This cannot be done
 			 * unless the low bits match.
 			 */
-			if ((t ^ (long)dst) & wmask || length < wsize)
-				t = length;
+			if ((t ^ (word)dst) & wmask || length < wsize)
+				t = length, length = 0;
 			else
-				t = wsize - (t & wmask);
-			length -= t;
+				t = wsize - (t & wmask), length -= t;
 			TLOOP1(*dst++ = *src++);
 		}
 		/*
@@ -93,13 +92,12 @@ bcopy(const void *src0, void *dst0, size_t length)
 		 */
 		src += length;
 		dst += length;
-		t = (long)src;
-		if ((t | (long)dst) & wmask) {
-			if ((t ^ (long)dst) & wmask || length <= wsize)
-				t = length;
+		t = (word)src;
+		if ((t | (word)dst) & wmask) {
+			if ((t ^ (word)dst) & wmask || length <= wsize)
+				t = length, length = 0;
 			else
-				t &= wmask;
-			length -= t;
+				t &= wmask, length -= t;
 			TLOOP1(*--dst = *--src);
 		}
 		t = length / wsize;
@@ -107,7 +105,7 @@ bcopy(const void *src0, void *dst0, size_t length)
 		t = length & wmask;
 		TLOOP(*--dst = *--src);
 	}
-done:
+
 	return;
 }
 DEF_WEAK(bcopy);
