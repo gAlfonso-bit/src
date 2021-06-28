@@ -119,6 +119,12 @@ size_t	 strxfrm_l(char *__restrict, const char *__restrict, size_t, locale_t)
 #endif
 
 #if __BSD_VISIBLE
+
+#ifndef	_MODE_T_DEFINED_
+#define	_MODE_T_DEFINED_
+typedef	__mode_t	mode_t;
+#endif
+
 void	 explicit_bzero(void *, size_t)
 		__attribute__ ((__bounded__(__buffer__,1,2)));
 void	*memmem(const void *, size_t, const void *, size_t);
